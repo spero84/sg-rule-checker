@@ -1,10 +1,13 @@
-# from datetime import datetime
+from datetime import datetime
 
 if __name__ == '__main__':
 
+    d = datetime.now()
+    print(d.strftime("%m"))
+    print(d.strftime(str(d.day-1)))
 
     '''
-    d = datetime.now()
+    
     print(str(d.year) + str(d.month) + str(d.day) + '_' + str(d.hour) + str(d.minute))
     
     v = list(range(1, 10))
@@ -17,9 +20,10 @@ if __name__ == '__main__':
     print( x for x in v if x not in y)
     '''
 
-    ll = ['a', 'b', 'c', 'd']
-    for ls in reversed(ll):
-        print(ls)
-        print("## : " + str(ll.index(ls)))
-        ll.pop(ll.index(ls))
-        print("$$ : " + ll.__str__())
+
+    # ll = ['a', 'b', 'c', 'd']
+    # for ls in reversed(ll):
+    #     print(ls)
+    #     print("## : " + str(ll.index(ls)))
+    #     ll.pop(ll.index(ls))
+    #     print("$$ : " + ll.__str__())

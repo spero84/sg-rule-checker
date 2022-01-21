@@ -109,7 +109,6 @@ if __name__ == '__main__':
     dynamodb = DynamoDB()
     dynamodb.create_unused_rule_table()
     dynamodb.create_not_assigned_table()
-    d = dynamodb.get_datetime()
 
     not_assigned_sg_put_list = []
     assigned_sg_list = {}
@@ -118,15 +117,15 @@ if __name__ == '__main__':
     for key, val in list(reversed(ec2sg.sg_with_ec2.items())):  # reverse dict for loop logic
         if not val:  # not assigned security group
             item = {"SGId": {'S': key}}
-            dynamodb.put_item(dynamodb.not_assigned_sg_table_name + d, item)
+            dynamodb.put_item(dynamodb.not_assigned_sg_table_name + dynamodb.get_datetime(), item)
             not_assigned_sg_put_list.append(key)
             del ec2sg.sg_with_ec2[key]
 
     print("####### size of sgr list :" + str(len(ec2sg.sgr_list)))
     # check logic
-    for sil in security_info_list:  # multi vpc flowlogs
+    for sil in security_info_list:  # multi vpc flow logs
         # print("#######33 sil.query_execution_results size : " + str(len(sil.query_result_list)))
-        for vfl in sil.query_result_list:  # vpc flowlog
+        for vfl in sil.query_result_list:  # vpc flow logs
             # print("#####3 ec2sg.sgr_list size : " + str(len(ec2sg.sgr_list)))
             if not ec2sg.sgr_list:
                 print("###### break loop")

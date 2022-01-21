@@ -24,7 +24,7 @@ class DynamoDB:
 
 
     def create_unused_rule_table(self):
-        response = self._describe_table(self.unused_rule_table_name + self.get_datetime())
+        response = self._describe_table(self.unused_rule_table_name + self.get_datetime())  #TODO erase self.get_datetime()
 
         if not response:
             self.dynamodb_client.create_table(
@@ -46,7 +46,7 @@ class DynamoDB:
         time.sleep(20)
 
     def create_not_assigned_table(self):
-        response = self._describe_table(self.not_assigned_sg_table_name + self.get_datetime())
+        response = self._describe_table(self.not_assigned_sg_table_name + self.get_datetime())  #TODO erase self.get_datetime()
 
         if not response:
             self.dynamodb_client.create_table(
@@ -73,9 +73,10 @@ class DynamoDB:
             Item=item
         )
 
+    #!! Change this funcion if want to modify table's name
     def get_datetime(self):
         d = datetime.now()
-        return '_' + str(d.year) + str(d.month) + str(d.day) + '_' + str(d.hour)
+        return '_' + d.strftime("%Y") + d.strftime("%m") + d.strftime(str(d.day - 1))
 
 
 if __name__ == '__main__':

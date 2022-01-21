@@ -15,10 +15,10 @@ import boto3
 d = datetime.now()
 
 query_string_1= "Select Distinct account_id, interface_id, srcaddr, srcport, dstaddr, dstport, protocol, action from "
-query_string_2 = " where action = \'ACCEPT\' and year='" + str(d.year) + "' and month='" + str(d.month)+ "' and day='" + str(d.day-1) + "' Order by srcaddr, srcport, dstaddr, dstport, protocol"
+query_string_2 = " where action = \'ACCEPT\' and year='" + d.strftime("%Y") + "' and month='" + d.strftime("%m")+ "' and day='" + d.strftime(str(d.day-1)) + "' Order by srcaddr, srcport, dstaddr, dstport, protocol"
 
 def get_datetime():
-    return '_' + str(d.year) + str(d.month) + str(d.day-1)
+    return '_' + d.strftime("%Y") + d.strftime("%m") + d.strftime(str(d.day-1))
 
 class SecurityInfo:
 
